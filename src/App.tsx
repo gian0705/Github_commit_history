@@ -1,6 +1,8 @@
+import Main from "./pages/main";
+
 function App() {
   return (
-    <div className="text-center">
+    <div className="text-center bg-slate-400 h-full">
       <header className="flex flex-col justify-center text-sm text-white items-center min-h-[100px]">
         <p>
           This is git history explorer!{" "}
@@ -14,6 +16,7 @@ function App() {
           </a>
         </p>
       </header>
+      <Main />
     </div>
   );
 }
