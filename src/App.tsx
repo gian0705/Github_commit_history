@@ -4,20 +4,19 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className=" text-center">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <p>This is git history explorer!{' '}
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://github.com/gian0705/Github_commit_history"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Repository URL
         </a>
+        </p>
+        
       </header>
     </div>
   );
