@@ -1,24 +1,36 @@
 import React from "react";
 import { GitCommit } from "../type";
+
 export type HistoryContentProps = {
   data?: GitCommit[];
 };
 
 const columns = ["email", "name", "date"];
 
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  };
+  return date.toLocaleDateString("en-US", options);
+};
+
 const HistoryContent = (props: HistoryContentProps) => {
   const { data: contentData } = props;
   if (!contentData || contentData.length === 0) {
     return (
       <div className="flex justify-center items-center h-full">
-        <span className=" text-red-400">Couldn't found history!</span>
+        <span className=" text-red-400">Couldn't find history!</span>
       </div>
     );
   }
 
   return (
-    <div>
-      <table className="table-auto">
+    <div className="px-4">
+      <table className="table-auto w-full">
         <thead>
           <tr>
             <th>#</th>
@@ -29,22 +41,25 @@ const HistoryContent = (props: HistoryContentProps) => {
           </tr>
         </thead>
         <tbody>
-          {contentData &&
-            contentData.map(({ commit = {} }, index) => {
-              const committer: any = commit.committer || {};
-              const { message } = commit;
-              return (
-                <tr key={index}>
-                  <td>{index}</td>
-                  <td>{message}</td>
-                  {columns.map((column, columnIndex) => (
-                    <td key={columnIndex}>
-                      {committer[column] || "Undefined"}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
+          {contentData.map(({ commit = {} }, index) => {
+            const committer: any = commit.committer || {};
+            const { message } = commit;
+            return (
+              <tr key={index} className=" border">
+                <td>{index}</td>
+                <td width={500} className=" text-left px-4">
+                  {message}
+                </td>
+                {columns.map((column, columnIndex) => (
+                  <td key={columnIndex}>
+                    {column === "date"
+                      ? formatDate(committer[column])
+                      : committer[column] || "Undefined"}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
