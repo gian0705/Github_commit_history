@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { GitCommit } from "./type";
+import HistoryContent from "./HistoryContent";
 
 export type MainPageProps = {};
 const Main = (props: MainPageProps) => {
@@ -66,7 +67,7 @@ const Main = (props: MainPageProps) => {
           <span className=" text-red-400">Couldn't found history!</span>
         </div>
       ) : (
-        <></>
+        <HistoryContent data={gitHistory} />
       )}
     </div>
   );
